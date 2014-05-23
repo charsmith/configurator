@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name = 'configurator',
+    name = 'pyconfigurator',
     packages = ['configurator'], # this must be the same as the name above
     version = '0.1',
     description = 'A library for easy configuration',
