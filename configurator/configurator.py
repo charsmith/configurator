@@ -90,7 +90,7 @@ class Configurator(object):
             return cls.__get_env(section, option, default=default)
 
     @classmethod
-    def getboolean(cls, section, option, default=None, raw=True, blank_default=False):
+    def getboolean(cls, section, option, default=None):
         try:
             return cls.config.getboolean(section, option)
         except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
