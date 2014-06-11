@@ -91,12 +91,9 @@ class Configurator(object):
 
     @classmethod
     def getboolean(cls, section, option, default=None):
-        try:
-            return cls.config.getboolean(section, option)
-        except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
-            ret = str(cls.__get_env(section, option, default=default))
-            if ret.lower() not in cls.config._boolean_states:
-                raise ValueError, 'Not a boolean: %s' % str(ret)
-            return cls.config._boolean_states[ret.lower()]
+        ret = cls.get(section, option, default=default)
+        if str(ret).lower() not in cls.config._boolean_states:
+            raise ValueError, 'Not a boolean: %s' % str(ret)
+        return cls.config._boolean_states[str(ret).lower()]
 
 Configurator.initialize(sys.argv)
