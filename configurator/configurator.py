@@ -89,4 +89,11 @@ class Configurator(object):
         except ConfigParser.NoSectionError:
             return cls.__get_env(section, option, default=default)
 
+    @classmethod
+    def getboolean(cls, section, option, default=None):
+        ret = cls.get(section, option, default=default)
+        if str(ret).lower() not in cls.config._boolean_states:
+            raise ValueError, 'Not a boolean: %s' % str(ret)
+        return cls.config._boolean_states[str(ret).lower()]
+
 Configurator.initialize(sys.argv)
