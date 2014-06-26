@@ -78,7 +78,14 @@ class Configurator(object):
         return env
 
     @classmethod
-    def get(cls, section, option, default=None, raw=True, blank_default=False):
+    def get(cls, section, *args, **kwargs):
+        if '.' in section:
+            section, option = section.split('.', 1)
+            return cls._get(section, option, *args, **kwargs)
+        return cls._get(section, *args, **kwargs)
+
+    @classmethod
+    def _get(cls, section, option, default=None, raw=True, blank_default=False):
         try:
             ret = cls.config.get(section, option, raw=raw)
             if blank_default and not ret:
@@ -90,8 +97,8 @@ class Configurator(object):
             return cls.__get_env(section, option, default=default)
 
     @classmethod
-    def getboolean(cls, section, option, default=None):
-        ret = cls.get(section, option, default=default)
+    def getboolean(cls, *args, **kwargs):
+        ret = cls.get(*args, **kwargs)
         if str(ret).lower() not in cls.config._boolean_states:
             raise ValueError, 'Not a boolean: %s' % str(ret)
         return cls.config._boolean_states[str(ret).lower()]
