@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'pyconfigurator',
     packages = ['configurator'], # this must be the same as the name above
-    version = '0.2',
+    version = '0.3',
     description = 'A library for easy configuration',
     author = 'Charles Smith, Jeff Magnusson',
     author_email = 'charles.s.smith@gmail.com, magnussj@gmail.com',
