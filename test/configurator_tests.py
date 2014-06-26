@@ -71,3 +71,13 @@ class TestSetup(unittest.TestCase):
         assert_equals(False, C.getboolean("bool","false4"))
         assert_equals(False, C.getboolean("bool","false5"))
         assert_equals(False, C.getboolean("bool","false6"))
+
+    def test_valid_formats(self):
+        C.initialize([
+            "--config", "value.one=One",
+            "--config", "value.two=Two"
+        ])
+        assert_equals("One", C.get('value', 'one', 'Three'), C.get('value.one', 'Two'))
+        assert_equals('Two', C.get('value.two'), C.get('value', 'two'))
+        assert_equals('Three', C.get('value.three', 'Three'), C.get('value', 'three', 'Three'))
+        assert_equals(None, C.get('value.four'), C.get('value', 'four'))
