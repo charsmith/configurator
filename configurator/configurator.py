@@ -14,7 +14,7 @@ def addOption(option, config):
         exit(1)
     if not config.has_section(section):
         config.add_section(section)
-    config.set(section, key, v)
+    ConfigParser.ConfigParser.set(config, section, key, v)
 
 def addOptionFile(filename, config):
     config.read(filename)
