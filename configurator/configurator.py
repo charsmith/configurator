@@ -24,7 +24,7 @@ class Configurator(object):
     def initialize(cls, args=None):
         cls.config = ConfigParser.SafeConfigParser({})
 
-        parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser(add_help=False)
         parser.add_argument("--config",
                         action="append",
                         default=[],
