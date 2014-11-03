@@ -8,13 +8,14 @@ def addOption(option, config):
     try:
         (k, v) = option.split('=',1)
         section, key = k.split('.')
+        if not config.has_section(section):
+            config.add_section(section)
+        ConfigParser.ConfigParser.set(config, section, key, v)
     except:
-        print "Arguments to config option are malformed: %s" % (option)
-        print "Use the following form: --config section.key=value"
-        exit(1)
-    if not config.has_section(section):
-        config.add_section(section)
-    ConfigParser.ConfigParser.set(config, section, key, v)
+        if os.environ.get('CONFIGURATOR', '').lower() != 'quiet':
+            print "Arguments to config option are malformed: %s" % (option)
+            print "Use the following form: --config section.key=value"
+            exit(1)
 
 def addOptionFile(filename, config):
     config.read(filename)
