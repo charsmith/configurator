@@ -1,5 +1,7 @@
+import __builtin__
 import argparse
 import ConfigParser
+import functools
 import os
 import sys
 
@@ -20,7 +22,21 @@ def addOption(option, config):
 def addOptionFile(filename, config):
     config.read(filename)
 
+class ConfiguratorType(type):
+    def __wrapper(cls, type_name, *args, **kwargs):
+        v = cls.get(*args, **kwargs)
+        return None if v is None else getattr(__builtin__, type_name)(v)
+
+    def __getattr__(cls, key):
+        if isinstance(key, basestring):
+            if key.startswith('get'):
+                type_name = key[3:]
+                return functools.partial(cls.__wrapper, type_name)
+        raise AttributeError(key)
+
 class Configurator(object):
+    __metaclass__ = ConfiguratorType
+
     @classmethod
     def initialize(cls, args=None):
         cls.config = ConfigParser.SafeConfigParser({})
@@ -103,5 +119,6 @@ class Configurator(object):
         if str(ret).lower() not in cls.config._boolean_states:
             raise ValueError, 'Not a boolean: %s' % str(ret)
         return cls.config._boolean_states[str(ret).lower()]
+
 
 Configurator.initialize(sys.argv)

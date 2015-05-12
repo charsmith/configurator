@@ -81,3 +81,18 @@ class TestSetup(unittest.TestCase):
         assert_equals('Two', C.get('value.two'), C.get('value', 'two'))
         assert_equals('Three', C.get('value.three', 'Three'), C.get('value', 'three', 'Three'))
         assert_equals(None, C.get('value.four'), C.get('value', 'four'))
+
+    def test_int(self):
+        C.initialize([
+            "--config", "value.one=1"
+        ])
+        assert_equals('1', C.get('value', 'one', '3'))
+        assert_equals('1', C.get('value.one', '2'))
+        assert_equals(1, C.getint('value.one'))
+        assert_equals(1, C.getint('value', 'one'))
+        assert_equals(3, C.getint('value.three', '3'))
+        assert_equals(3, C.getint('value', 'three', '3'))
+        assert_equals(3, C.getint('value.three', 3))
+        assert_equals(None, C.getint('value.four'))
+        assert_equals(None, C.getint('value', 'four'))
+
