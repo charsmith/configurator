@@ -1,0 +1,5 @@
+include setup.cfg
+include setup.py
+include configurator/__init__.py
+include configurator/configurator.py
+include *.md
