@@ -2,8 +2,8 @@ from setuptools import setup
 
 setup(
     name = 'pyconfigurator',
-    packages = ['pyconfigurator'], # this must be the same as the name above
-    version = '0.4.3',
+    packages = ['configurator'], # this must be the same as the name above
+    version = '0.4.4',
     install_requires = ['future'],
     description = 'A library for easy configuration',
     author = 'Charles Smith, Jeff Magnusson',
