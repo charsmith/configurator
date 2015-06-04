@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 from future import standard_library
 standard_library.install_aliases()
 from builtins import str
@@ -31,13 +31,12 @@ def addOptionFile(filename, config):
 class ConfiguratorType(type):
     def __wrapper(cls, type_name, *args, **kwargs):
         v = cls.get(*args, **kwargs)
-        return None if v is None else getattr(__builtin__, type_name)(v)
+        return None if v is None else getattr(builtins, type_name)(v)
 
     def __getattr__(cls, key):
-        if isinstance(key, str):
-            if key.startswith('get'):
-                type_name = key[3:]
-                return functools.partial(cls.__wrapper, type_name)
+        if key.startswith('get'):
+            type_name = key[3:]
+            return functools.partial(cls.__wrapper, type_name)
         raise AttributeError(key)
 
 class Configurator(with_metaclass(ConfiguratorType, object)):
