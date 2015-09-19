@@ -43,6 +43,7 @@ class Configurator(with_metaclass(ConfiguratorType, object)):
     @classmethod
     def initialize(cls, args=None):
         cls.config = configparser.SafeConfigParser({})
+        cls.config.optionxform=str
 
         parser = argparse.ArgumentParser(add_help=False)
         parser.add_argument("--config",

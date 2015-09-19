@@ -96,3 +96,8 @@ class TestSetup(unittest.TestCase):
         assert_equals(None, C.getint('value.four'))
         assert_equals(None, C.getint('value', 'four'))
 
+    def test_case(self):
+        C.initialize([
+            "--config", "env.VARIABLE=1"
+        ])
+        assert_equals([('VARIABLE', '1')], C.config.items('env'))
