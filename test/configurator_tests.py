@@ -101,3 +101,10 @@ class TestSetup(unittest.TestCase):
             "--config", "env.VARIABLE=1"
         ])
         assert_equals([('VARIABLE', '1')], C.config.items('env'))
+
+    def test_conf(self):
+        C.initialize([
+            "--conf", "env.VARIABLE=1",
+            "--config", "blah.blah=2"
+        ])
+        assert_equals('2', C.get('blah.blah'))

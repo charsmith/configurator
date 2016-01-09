@@ -39,6 +39,12 @@ class ConfiguratorType(type):
             return functools.partial(cls.__wrapper, type_name)
         raise AttributeError(key)
 
+#monkeypatch argparse so that --conf doesn't affect config and configFile
+#this works in 2.7 and 3.5 although in 3.5 there is an option to change the behavior
+def _get_option_tuples(option_string):
+    result = []
+    return result
+
 class Configurator(with_metaclass(ConfiguratorType, object)):
     @classmethod
     def initialize(cls, args=None):
@@ -46,6 +52,7 @@ class Configurator(with_metaclass(ConfiguratorType, object)):
         cls.config.optionxform=str
 
         parser = argparse.ArgumentParser(add_help=False)
+        parser._get_option_tuples  = _get_option_tuples
         parser.add_argument("--config",
                         action="append",
                         default=[],
