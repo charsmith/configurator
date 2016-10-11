@@ -126,10 +126,13 @@ class Configurator(with_metaclass(ConfiguratorType, object)):
 
     @classmethod
     def getboolean(cls, *args, **kwargs):
+        if sys.version_info >= (3, 0):
+            boolean_states = cls.config.BOOLEAN_STATES
+        else:
+            boolean_states = cls.config._boolean_states
         ret = cls.get(*args, **kwargs)
-        if str(ret).lower() not in cls.config._boolean_states:
+        if str(ret).lower() not in boolean_states:
             raise ValueError('Not a boolean: %s' % str(ret))
-        return cls.config._boolean_states[str(ret).lower()]
-
+        return boolean_states[str(ret).lower()]
 
 Configurator.initialize(sys.argv)
