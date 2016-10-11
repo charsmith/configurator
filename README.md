@@ -1,3 +1,5 @@
+[<img src="https://img.shields.io/pypi/v/pyconfigurator.svg">](https://pypi.python.org/pypi/pyconfigurator)
+
 configurator
 ============
 
