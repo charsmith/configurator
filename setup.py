@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name = 'pyconfigurator',
     packages = ['configurator'], # this must be the same as the name above
-    version = '0.4.11',
+    version = '0.4.12',
     install_requires = ['future', 'nose', 'tox'],
     description = 'A library for easy configuration',
     author = 'Charles Smith, Jeff Magnusson',
@@ -24,5 +24,6 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5'
     ],
 )
