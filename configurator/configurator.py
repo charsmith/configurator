@@ -5,11 +5,14 @@ from builtins import str
 from builtins import object
 import builtins
 import argparse
-import configparser
 import functools
 import os
 import sys
 from future.utils import with_metaclass
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 def addOption(option, config):
     assert option is not None, "--config must be followed by an argument"
