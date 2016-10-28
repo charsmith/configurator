@@ -9,9 +9,9 @@ import functools
 import os
 import sys
 from future.utils import with_metaclass
-try:
+if sys.version_info >= (3, 0):
     import configparser
-except ImportError:
+else:
     import ConfigParser as configparser
 
 def addOption(option, config):
