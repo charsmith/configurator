@@ -5,7 +5,7 @@ setup(
     packages = ['configurator'], # this must be the same as the name above
     version = '0.4.15',
     install_requires = ['future'],
-    extras_require={'develop': ['nose', 'tox']}
+    extras_require={'develop': ['nose', 'tox']},
     description = 'A library for easy configuration',
     author = 'Charles Smith, Jeff Magnusson',
     author_email = 'charles.s.smith@gmail.com, magnussj@gmail.com',
