@@ -23,7 +23,7 @@ def addOption(option, config):
             config.add_section(section)
         configparser.ConfigParser.set(config, section, key, v)
     except:
-        if os.environ.get('CONFIGURATOR', '').lower() != 'quiet':
+        if os.environ.get('CONFIGURATOR', '').lower() == 'loud':
             print("Arguments to config option are malformed: %s" % (option))
             print("Use the following form: --config section.key=value")
             exit(1)
