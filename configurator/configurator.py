@@ -58,7 +58,7 @@ def _get_option_tuples(option_string):
 class Configurator(with_metaclass(ConfiguratorType, object)):
     @classmethod
     def initialize(cls, args=None):
-        cls.config = configparser.SafeConfigParser({})
+        cls.config = configparser.ConfigParser({})
         cls.config.optionxform = str
 
         parser = argparse.ArgumentParser(add_help=False)
